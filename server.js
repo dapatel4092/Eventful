@@ -14,7 +14,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(require('./controllers/homeroutes'));
+app.use(require('./controllers/home-routes'));
 
 // Starts the server listening
 app.listen(PORT, () => {
