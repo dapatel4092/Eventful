@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+  </head>
+  <body>
+    <h1>Login Page</h1>
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"><br>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password"><br>
+
+      <button type="submit">Login</button>
+    </form>
+
+    {{#if errorMessage}}
+    <div class="error-message">{{errorMessage}}</div>
+    {{/if}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script src="./js/login.js"></script>
+  </body>
+</html>
