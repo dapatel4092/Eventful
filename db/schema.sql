@@ -1,3 +1,2 @@
-drop if Database exists Eventful_db
-create Database Eventful_db
-
+DROP DATABASE IF EXISTS user_db;
+CREATE DATABASE user_db;
