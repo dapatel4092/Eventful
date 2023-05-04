@@ -11,7 +11,11 @@
       </h1>
       <nav>
         <button id="events">Events near me</button>
-        <button id="logout-button">Logout</button>
+       <form action="/api/users/logout" method="POST">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <button type="submit" id="logout">Logout</button>
+</form>
+
 
       </nav>
       <p>Find out what fun events are happening around you!</p>
