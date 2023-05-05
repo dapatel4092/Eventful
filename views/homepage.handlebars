@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
  <html>
+=======
+{{ <html>
+>>>>>>> Stashed changes
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +12,7 @@
 <body>
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
+<<<<<<< Updated upstream
       <h1>
         abcd
       </h1>
@@ -16,6 +21,29 @@
         
       <button type="submit" id="logout">Logout</button>
 
+=======
+
+	  <h1>Event Search</h1>
+	    <form action="/search" method="GET">
+		    <label for="search">Search events:</label>
+		    <input type="text" name="search" id="search" placeholder="Enter a keyword">
+		    <button type="submit">Search</button>
+	    </form>
+
+        {{#if events}}
+		  <h2>Search results</h2>
+		  <ul>
+			  {{#each events}}
+				  <li><a href="/events/{{id}}">{{name}}</a></li>
+			  {{/each}}
+		  </ul>
+	  {{else}}
+		  <p>No events found</p>
+	  {{/if}}
+
+      <nav>
+      <button type="submit" id="logout">Logout</button>
+>>>>>>> Stashed changes
       </nav>
       <p>Find out what fun events are happening around you!</p>
 
@@ -31,4 +59,8 @@
 
 
 
+<<<<<<< Updated upstream
 </html>   
+=======
+</html>}}
+>>>>>>> Stashed changes
