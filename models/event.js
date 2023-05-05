@@ -10,11 +10,6 @@ const { all, getAllCategories } = require("../controllers/home-routes");
 const searchQuery = prompt("Enter a city or an event to search for on Eventbrite and BandsInTown:");
 
 
-const eventbriteQueryParams = {
-  token: eventbriteKey,
-  ...(searchQuery.includes(",") ? { "location.address": searchQuery } : { q: searchQuery })
-};
-
 const categories = {
   Business: 101,
   FoodDrink: 110,
