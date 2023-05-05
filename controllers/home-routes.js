@@ -6,6 +6,9 @@ router.get('/', async (req, res) => {
   
 });
 
+function getAllCategories() {
+  return Object.values(categories);
+}
 
 module.exports = router;
 
