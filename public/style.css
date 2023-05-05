@@ -57,7 +57,7 @@ button {
     transform: scale(0.95) rotate(-3deg);
   }
 
-}
+
 
 @keyframes shimmer {
   to {
@@ -65,3 +65,4 @@ button {
     box-shadow: -2px -2px 6px rgba(255, 227, 126, 0.5), 2px 2px 6px rgba(144, 148, 255, 0.5);
   }
 
+}
