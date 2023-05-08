@@ -2,20 +2,10 @@ require('dotenv').config();
 const Sequelize = require('sequelize');
 
 
-// const sequelize = new Sequelize(
-//   process.DB_NAME,
-//   process.DB_USER,
-//   process.DB_PASSWORD,
-//   {
-//     host: 'localhost',
-//     dialect: 'mysql',
-//     port: 3306
-//   }
-// );
 const sequelize = new Sequelize(
-"Eventful_db",
-  "root",
-  "JackandJillwentupthehill!",
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
     host: 'localhost',
     dialect: 'mysql',
