@@ -1,11 +1,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Eventful</title>
-    <link rel="stylesheet" href="/public/style.css">
+    {{!-- <link rel="stylesheet" href="inline.css"/> --}}
+    <link rel="stylesheet" href="/style.css">
     
 </head>
 <body>
-  <div class="flex-column justify-space-around">
+  {{!-- <div class="flex-column justify-space-around"> --}}
     <header class="display-flex justify-space-between align-center p-2">
       <h1>
         Eventful
@@ -18,7 +19,7 @@
       <p>Find out what fun events are happening around you!</p>
     </header>
       <main class="container container-fluid mt-5">
-        {{ body }}
+        {{{ body }}}
       </main>
-  </div>
-  </body>cd 
+  {{!-- </div> --}}
+  </body>
