@@ -11,15 +11,22 @@
       <h1>
         Eventful
       </h1>
-      <nav id="navbar" class="navbar">
-        <button id="events">Events near me</button>
-        <button id="logout-button">Logout</button>
-
-      </nav>
+      <nav>
+    <a href="/">Home</a>
+    {{#if loggedIn}}
+    <button id="logout" class="btn-no-style">Logout</button>
+    {{else}}
+    <a href="js/login.js">Login</a>
+    <button id="Events">Events near me</button>
+    {{/if}}
+  </nav>
       <p>Find out what fun events are happening around you!</p>
     </header>
       <main class="container container-fluid mt-5">
         {{{ body }}}
       </main>
+      {{#if loggedIn}}
+  <script src="public/js/logout.js"></script>
+  {{/if}}
   {{!-- </div> --}}
   </body>
