@@ -1,39 +1,38 @@
-
 <h1>Event Search</h1>
 <form id="search-form">
   <div class="form-group">
     <input type="text" class="form-control" id="search" name="search" placeholder="Search...">
   </div>
 
- <div class="form-group">
-  <select class="form-control" id="category" name="category">
-    <option value="">All Categories</option>
-    {{#each categories}}
-      <option value="{{@index}}">{{this.name}}</option>
-    {{/each}}
-  </select>
-</div>
+  <div class="form-group">
+    <select class="form-control" id="category" name="category">
+      <option value="">All Categories</option>
+      {{#each categories}}
+        <option value="{{@index}}">{{this.name}}</option>
+      {{/each}}
+    </select>
+  </div>
 
   <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
-<!-- Display Search Results -->
-<div id="search-results"></div>
-
-<!-- Define a Handlebars template for the search results -->
-
-<script id="search-results-template" type="text/x-handlebars-template">
-  <div>
-    {{#each events}}
+<div id="search-results">
+  {{#if events}}
+    {{#each allEvents}}
       <div class="card">
-        <h2>{{this.name.text}}</h2>
-        <p>{{this.description.text}}</p>
-        <p>Start Time: {{this.start.local}}</p>
-        <p>End Time: {{this.end.local}}</p>
+        <h2>{{this.name}}</h2>
+        <p>{{this.description}}</p>
+        <p>Start Time: {{this.start_time}}</p>
+        <p>End Time: {{this.end_time}}</p>
+        <p>Category: {{this.category}}</p>
       </div>
     {{/each}}
-  </div>
-</script>
+  {{else}}
+    <p>No events found</p>
+  {{/if}}
+</div>
 
 
-<script src="../models/search.js"></script>
+
+<script src="../controllers/home-routes.js"></script>
+

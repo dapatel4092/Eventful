@@ -1,101 +1,122 @@
-<!-- Section: Design Block -->
-<section class="background-radial-gradient overflow-hidden">
-  
+<div class="row">
+  <div class="col-md-6  login">
+    <h2>Login</h2>
 
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-    <div class="row gx-lg-5 align-items-center mb-5">
-      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-          Find Events <br />
-          <span style="color: hsl(218, 81%, 75%)"> Near you!</span>
-        </h1>
-        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-         Sign up today and start viewing all the fun and one of a lifetime events happening near you!
-        </p>
+    <form class="form login-form">
+      <div class="form-group">
+        <label for="email-login">email:</label>
+        <input class="form-input" type="text" id="email-login" />
       </div>
+      <div class="form-group">
+        <label for="password-login">password:</label>
+        <input class="form-input" type="password" id="password-login" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">login</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
 
-      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+    <!-- Section: Design Block -->
+    <section class="background-radial-gradient overflow-hidden">
 
-        <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
-            <form>
-              <!-- 2 column grid layout with text inputs for the first and last names -->
-              <div class="row">
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">First name</label>
+
+      <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-center mb-5">
+          <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+            <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+              Sign up Here! <br />
+              <span style="color: hsl(218, 81%, 75%)"> Find Events Near you!</span>
+            </h1>
+            <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+              Sign up today and start viewing all the fun and one of a lifetime events happening near you!
+            </p>
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+            <div class="card bg-glass">
+              <div class="card-body px-4 py-5 px-md-5">
+                <form>
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1" class="form-control" />
+                        <label class="form-label" for="form3Example1">First name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example2" class="form-control" />
+                        <label class="form-label" for="form3Example2">Last name</label>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
-                    <label class="form-label" for="form3Example2">Last name</label>
+
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="email" id="form3Example3" class="form-control" />
+                    <label class="form-label" for="form3Example3">Email address</label>
                   </div>
-                </div>
+
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form3Example4" class="form-control" />
+                    <label class="form-label" for="form3Example4">Password</label>
+                  </div>
+                  {{#if errorMessage}}
+                  <div class="error-message">{{errorMessage}}</div>
+                  {{/if}}
+
+                  <!-- Checkbox -->
+                  <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                    <label class="form-check-label" for="form2Example33">
+                      Save password
+                    </label>
+                  </div>
+
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Sign up
+                  </button>
+
+                  <!-- Save password -->
+                  <div class="text-center">
+                    <p>Save Password</p>
+                    <button onClick={console.log("click")}>
+                      save password
+                      <svg width="79" height="46" viewBox="0 0 79 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_f_618_1123)">
+                          <path d="M42.9 2H76.5L34.5 44H2L42.9 2Z" fill="url(#paint0_linear_618_1123)" />
+                        </g>
+                        <defs>
+                          <filter id="filter0_f_618_1123" x="0" y="0" width="78.5" height="46"
+                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                            <feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_618_1123" />
+                          </filter>
+                          <linearGradient id="paint0_linear_618_1123" x1="76.5" y1="2.00002" x2="34.5" y2="44"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="white" stop-opacity="0.6" />
+                            <stop offset="1" stop-color="white" stop-opacity="0.05" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </button>
+
+                  </div>
+                </form>
               </div>
-
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
-              </div>
-              // {{#if errorMessage}}
-      //<div class="error-message">{{errorMessage}}</div>
-        //{{/if}} 
-
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-center mb-4">
-                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                <label class="form-check-label" for="form2Example33">
-                  Subscribe to our newsletter
-                </label>
-              </div>
-
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign up
-              </button>
-
-              <!-- Save password -->
-              <div class="text-center">
-                <p>Save Password</p>
-          <button onClick={console.log("click")} >
-                  save password
-              <svg width="79" height="46" viewBox="0 0 79 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g filter="url(#filter0_f_618_1123)">
-                  <path d="M42.9 2H76.5L34.5 44H2L42.9 2Z" fill="url(#paint0_linear_618_1123)"/>
-                </g>
-              <defs>
-                <filter id="filter0_f_618_1123" x="0" y="0" width="78.5" height="46" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                  <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                  <feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_618_1123"/>
-                </filter>
-                <linearGradient id="paint0_linear_618_1123" x1="76.5" y1="2.00002" x2="34.5" y2="44" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="white" stop-opacity="0.6"/>
-                  <stop offset="1" stop-color="white" stop-opacity="0.05"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </button>
-
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<script src="./js/login.js"></script>
-<!-- Section: Design Block -->
-
+    </section>
+    <script src="./js/login.js"></script>
+    <!-- Section: Design Block -->
