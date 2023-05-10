@@ -1,36 +1,37 @@
 <h1>Event Search</h1>
-<form id="search-form">
-  <div class="form-group">
-    <input type="text" class="form-control" id="search" name="search" placeholder="Search...">
-  </div>
 
-  <div class="form-group">
-    <select class="form-control" id="category" name="category">
-      <option value="">All Categories</option>
-      {{#each categories}}
-        <option value="{{@index}}">{{this.name}}</option>
-      {{/each}}
-    </select>
-  </div>
+<form action="/search" method="POST">
+  <label for="search">Search:</label>
+  <input type="text" name="search" id="search" placeholder="Search...">
 
-  <button type="submit" class="btn btn-primary">Search</button>
+  <label for="category">Category:</label>
+  <select name="category" id="category">
+    <option value="">All categories</option>
+    <option value="music">Music</option>
+    <option value="sports">Sports</option>
+    <option value="arts">Arts</option>
+  </select>
+
+  <button type="submit">Search</button>
 </form>
 
-<div id="search-results">
-  {{#if events}}
-    {{#each allEvents}}
-      <div class="card">
-        <h2>{{this.name}}</h2>
-        <p>{{this.description}}</p>
-        <p>Start Time: {{this.start_time}}</p>
-        <p>End Time: {{this.end_time}}</p>
-        <p>Category: {{this.category}}</p>
-      </div>
+<!-- events.handlebars -->
+
+{{#if events}}
+  <h2>Events:</h2>
+  <ul>
+    {{#each events}}
+      <li>
+        <h3>{{this.name.text}}</h3>
+        <p>{{this.description.text}}</p>
+        <p>Date: {{this.start.local}}</p>
+        <p>Location: {{this.location.address}}</p>
+      </li>
     {{/each}}
-  {{else}}
-    <p>No events found</p>
-  {{/if}}
-</div>
+  </ul>
+{{else}}
+  <p>No events found.</p>
+{{/if}}
 
 
 <script src="../controllers/home-routes.js"></script>
