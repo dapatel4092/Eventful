@@ -63,3 +63,9 @@ svg {
       2px 2px 6px rgba(144, 148, 255, 0.5);
   }
 }
+.login{
+  display: flex;
+  align-content: last baseline;
+  justify-content: space-between;
+
+}
