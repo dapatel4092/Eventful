@@ -31,7 +31,8 @@ const categories = {
 const queryParams = {
   token: eventbriteKey,
   ...(searchQuery.includes(",") ? { "location.address": searchQuery } : { q: searchQuery }),
-  categories: [ categories.Business, categories.FoodDrink, categories.Community, categories.Music, categories.FilmMedia, categories.PerformingVisualArts, categories.SportsFitness, categories.TravelOutdoor, categories.CharityCauses, categories.Government, categories.ScienceTechnology, categories.Fashion, categories.HomeLifestyle, categories.All]
+  categories: Object.values(categories)
+
 };
 
 
@@ -69,3 +70,5 @@ fetch(eventbriteUrl, {
       .catch(error => console.error(error));
   })
   .catch(error => console.error(error));
+
+ 
