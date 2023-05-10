@@ -1,24 +1,38 @@
 <h1>Event Search</h1>
-<form action="/search" method="GET">
-	<label for="search">Search events:</label>
-	<input type="text" name="search" id="search" placeholder="Enter a keyword">
-	<button type="submit">Search</button>
+<form id="search-form">
+  <div class="form-group">
+    <input type="text" class="form-control" id="search" name="search" placeholder="Search...">
+  </div>
+
+  <div class="form-group">
+    <select class="form-control" id="category" name="category">
+      <option value="">All Categories</option>
+      {{#each categories}}
+        <option value="{{@index}}">{{this.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
-{{#if events}}
-<h2>Search results</h2>
-<ul>
-	{{#each events}}
-	<li><a href="/events/{{id}}">{{name}}</a></li>
-	{{/each}}
-</ul>
-{{else}}
-<p>No events found</p>
-{{/if}}
-
-
-</header>
-<main class="container container-fluid mt-5">
-	{{{ body }}}
-</main>
+<div id="search-results">
+  {{#if events}}
+    {{#each allEvents}}
+      <div class="card">
+        <h2>{{this.name}}</h2>
+        <p>{{this.description}}</p>
+        <p>Start Time: {{this.start_time}}</p>
+        <p>End Time: {{this.end_time}}</p>
+        <p>Category: {{this.category}}</p>
+      </div>
+    {{/each}}
+  {{else}}
+    <p>No events found</p>
+  {{/if}}
 </div>
+
+
+
+<script src="../controllers/home-routes.js"></script>
+
