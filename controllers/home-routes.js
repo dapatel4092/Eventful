@@ -1,120 +1,71 @@
-
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
-const eventbriteUrl = "https://www.eventbriteapi.com/v3/events/search/";
-const eventbriteKey = "LMZTLLTII2KJCUS7PBHH";
-const bandsInTownUrl = "https://rest.bandsintown.com/v4/events/";
-const bandsInTownKey = "3a9f493fc15e7dac615ac7e56581f4da";
+// Import the code from the other file
+const {
+  getAllCategories,
+  eventbriteUrl,
+  eventbriteKey,
+  bandsInTownUrl,
+  bandsInTownKey,
+} = require('../models/event.js');
 
-const categories = [
-  {id: "101", name: "Business"},
-  {id: "110", name: "FoodDrink"},
-  {id: "113", name: "Community"},
-  {id: "103", name: "Music"},
-  {id: "104", name: "FilmMedia"},
-  {id: "105", name: "PerformingVisualArts"},
-  {id: "108", name: "SportsFitness"},
-  {id: "109", name: "TravelOutdoor"},
-  {id: "111", name: "CharityCauses"},
-  {id: "112", name: "Government"},
-  {id: "102", name: "ScienceTechnology"},
-  {id: "106", name: "Fashion"},
-  {id: "107", name: "HomeLifestyle"},
-];
+// Define the route handlers
 
-router.post("/search", (req, res) => {
+router.get('/', async (req, res) => {
+  // Send the rendered Handlebars.js template back as the response
+  res.render('homepage');
+});
+
+router.get('/login', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/homepage');
+    return;
+  }
+
+  res.render('login');
+});
+
+router.post('/search', (req, res) => {
   const searchQuery = req.body.search;
   const categoryId = req.body.category;
 
-  // Set up Eventbrite API query params
-  const eventbriteQueryParams = {
+  const queryParams = {
     token: eventbriteKey,
     ...(searchQuery.includes(",") ? { "location.address": searchQuery } : { q: searchQuery }),
+    ...(category ? { categories: getAllCategories()[category] } : {})
   };
-  if (categoryId !== "") {
-    eventbriteQueryParams["categories"] = categoryId;
-  }
 
-  // Call Eventbrite API
-  fetch(eventbriteUrl + "?" + new URLSearchParams(eventbriteQueryParams), {
+  fetch(eventbriteUrl, {
       headers: {
         "Authorization": "Bearer " + eventbriteKey,
         "Content-Type": "application/json"
       },
-      method: "GET"
+      body: JSON.stringify(queryParams),
+      method: "POST"
     })
     .then(response => response.json())
     .then(eventbriteData => {
-      const eventbriteEvents = eventbriteData.events || [];
 
-      // Set up BandsInTown API query params
+      const eventbriteEvents = eventbriteData.events || [];
       const bandsInTownQueryParams = {
         app_id: bandsInTownKey,
         ...(searchQuery.includes(",") ? { "location": searchQuery } : { "keyword": searchQuery })
       };
-      if (categoryId !== "") {
-        bandsInTownQueryParams["classification_name"] = categories.find(category => category.id === categoryId).name;
-      }
 
-      // Call BandsInTown API
-      return fetch(bandsInTownUrl + "?" + new URLSearchParams(bandsInTownQueryParams), {
-          method: "GET"
-        })
+      return fetch(bandsInTownUrl + "?" + new URLSearchParams(bandsInTownQueryParams))
         .then(response => response.json())
         .then(bandsInTownData => {
           // List of events from the BandsInTown API response
           const bandsInTownEvents = bandsInTownData || [];
-
-          // Combine the list of events and send the response
           const allEvents = [...eventbriteEvents, ...bandsInTownEvents];
-          res.json(allEvents);
-        })
-        .catch(error => {
-          console.error(error);
-          res.status(500).json({ error: "Internal Server Error" });
+          res.json({ events: allEvents });
+          console.log(allEvents);
         });
-    })
-    .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
+      })
 });
-
-module.exports = router
-
-
-router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/homepage');
-    return;
-  }
-
-  res.render('login');
-});
-
-
-
-router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/homepage');
-    return;
-  }
-
-  res.render('login');
-});
-
-
-
-router.get('/', async (req, res) => {
-  // Send the rendered Handlebars.js template back as the response
-  
-  res.render('homepage');
-});
-
 
 
 module.exports = router;
