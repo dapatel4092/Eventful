@@ -1,46 +1,38 @@
- <html>
+<h1>Event Search</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Eventful</title>
-    <link rel="stylesheet" href="/public/style.css">
-</head>
-<body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
+<form action="/search" method="POST">
+  <label for="search">Search:</label>
+  <input type="text" name="search" id="search" placeholder="Search...">
 
-	  <h1>Event Search</h1>
-	    <form action="/search" method="GET">
-		    <label for="search">Search events:</label>
-		    <input type="text" name="search" id="search" placeholder="Enter a keyword">
-		    <button type="submit">Search</button>
-	    </form>
+  <label for="category">Category:</label>
+  <select name="category" id="category">
+    <option value="">All categories</option>
+    <option value="music">Music</option>
+    <option value="sports">Sports</option>
+    <option value="arts">Arts</option>
+  </select>
 
-        {{#if events}}
-		  <h2>Search results</h2>
-		  <ul>
-			  {{#each events}}
-				  <li><a href="/events/{{id}}">{{name}}</a></li>
-			  {{/each}}
-		  </ul>
-	  {{else}}
-		  <p>No events found</p>
-	  {{/if}}
+  <button type="submit">Search</button>
+</form>
 
-      <nav>
-      <button type="submit" id="logout">Logout</button>
-      </nav>
-      <p>Find out what fun events are happening around you!</p>
+<!-- events.handlebars -->
 
-      <p>1234!</p>
-
-    </header>
-      <main class="container container-fluid mt-5">
-        {{{ body }}}
-      </main>
-  </div>
-  </body>
+{{#if events}}
+  <h2>Events:</h2>
+  <ul>
+    {{#each events}}
+      <li>
+        <h3>{{this.name.text}}</h3>
+        <p>{{this.description.text}}</p>
+        <p>Date: {{this.start.local}}</p>
+        <p>Location: {{this.location.address}}</p>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No events found.</p>
+{{/if}}
 
 
-</html>
+<script src="../controllers/home-routes.js"></script>
 
