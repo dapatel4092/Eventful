@@ -68,6 +68,7 @@ svg {
   max-width: 50%;
 }
 
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -162,4 +163,13 @@ form .form-textarea {
 
 .row {
   justify-content: space-between;
+
 }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
