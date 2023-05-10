@@ -6,11 +6,14 @@ Eventful is an app that allows you to locate events in your local area. This is 
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
-- [Screenshots](#Screenshots)
-- [Contact-Us](#contact-info)
+- [Eventful](#eventful)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [Screenshots](#screenshots)
+  - [Contact-Us](#contact-us)
 
 ## [Installation](#table-of-contents)
 
@@ -46,3 +49,7 @@ https://github.com/Ani-Kandikattu
 https://github.com/dapatel4092
 https://github.com/TinyTiim
 https://github.com/setsuk0
+
+
+Deployed link:
+ https://aqueous-ocean-20138.herokuapp.com/ 
