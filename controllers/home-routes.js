@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 
-// Import the code from the other file
 const {
   getAllCategories,
   eventbriteUrl,
@@ -28,44 +27,44 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.post('/search', (req, res) => {
+router.post('/search', async (req, res) => {
   const searchQuery = req.body.search;
   const categoryId = req.body.category;
 
   const queryParams = {
     token: eventbriteKey,
     ...(searchQuery.includes(",") ? { "location.address": searchQuery } : { q: searchQuery }),
-    ...(category ? { categories: getAllCategories()[category] } : {})
+    ...(categoryId ? { categories: getAllCategories()[categoryId] } : {})
   };
 
-  fetch(eventbriteUrl, {
+  try {
+    const response = await fetch(eventbriteUrl, {
       headers: {
         "Authorization": "Bearer " + eventbriteKey,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(queryParams),
       method: "POST"
-    })
-    .then(response => response.json())
-    .then(eventbriteData => {
+    });
+    const eventbriteData = await response.json();
+    const eventbriteEvents = eventbriteData.events || [];
 
-      const eventbriteEvents = eventbriteData.events || [];
-      const bandsInTownQueryParams = {
-        app_id: bandsInTownKey,
-        ...(searchQuery.includes(",") ? { "location": searchQuery } : { "keyword": searchQuery })
-      };
+    const bandsInTownQueryParams = {
+      app_id: bandsInTownKey,
+      ...(searchQuery.includes(",") ? { "location": searchQuery } : { "keyword": searchQuery })
+    };
 
-      return fetch(bandsInTownUrl + "?" + new URLSearchParams(bandsInTownQueryParams))
-        .then(response => response.json())
-        .then(bandsInTownData => {
-          // List of events from the BandsInTown API response
-          const bandsInTownEvents = bandsInTownData || [];
-          const allEvents = [...eventbriteEvents, ...bandsInTownEvents];
-          res.json({ events: allEvents });
-          console.log(allEvents);
-        });
-      })
+    const bandsInTownResponse = await fetch(bandsInTownUrl + "?" + new URLSearchParams(bandsInTownQueryParams));
+    const bandsInTownData = await bandsInTownResponse.json();
+    const bandsInTownEvents = bandsInTownData || [];
+
+    const allEvents = [...eventbriteEvents, ...bandsInTownEvents];
+    res.json({ events: allEvents });
+    console.log(allEvents);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
-
 
 module.exports = router;
