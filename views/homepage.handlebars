@@ -1,10 +1,10 @@
-<h1>Event Search</h1>
+<h1 class="description">Event Search</h1>
 
 <form action="/search" method="POST">
-  <label for="search">Search:</label>
+  <label for="search" class="loud-beats">Search:</label>
   <input type="text" name="search" id="search" placeholder="Search...">
 
-  <label for="category">Category:</label>
+  <label for="category" class="loud-beats">Category:</label>
   <select name="category" id="category">
     <option value="">All categories</option>
     <option value="music">Music</option>
@@ -18,7 +18,7 @@
 <!-- events.handlebars -->
 
 {{#if events}}
-  <h2>Events:</h2>
+  <h2 class="loud-beats">Events:</h2>
   <ul>
     {{#each events}}
       <li>
@@ -30,7 +30,7 @@
     {{/each}}
   </ul>
 {{else}}
-  <p>No events found.</p>
+  <p class="loud-beats">No events found.</p>
 {{/if}}
 
 
