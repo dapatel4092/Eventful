@@ -8,19 +8,19 @@
 <body>
   {{!-- <div class="flex-column justify-space-around"> --}}
     <header class="display-flex justify-space-between align-center p-2">
-      <h1>
+      <h1 class="title">
         Eventful
       </h1>
       <nav>
-    <a href="/">Home</a>
+    <a href="/" class="eventful-button">Home</a>
     {{#if loggedIn}}
     <button id="logout" class="btn-no-style">Logout</button>
     {{else}}
-    <a href="/login">Login</a>
+    <a href="/login" class="eventful-button">Login</a>
     <button id="Events">Events near me</button>
     {{/if}}
   </nav>
-      <p>Find out what fun events are happening around you!</p>
+      <p class="description">Find out what fun events are happening around you!</p>
     </header>
       <main class="container container-fluid mt-5">
         {{{ body }}}
