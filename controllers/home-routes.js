@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const fetch = require('node-fetch');
 
 const {
   getAllCategories,
@@ -28,43 +27,32 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/search', async (req, res) => {
-  const searchQuery = req.body.search;
-  const categoryId = req.body.category;
+  const { search, category } = req.body;
+  const eventbriteQueryParams = { q: search, ...getAllCategories(category), token: eventbriteKey };
+  const bandsInTownQueryParams = { app_id: bandsInTownKey, location: search };
 
-  const queryParams = {
-    token: eventbriteKey,
-    ...(searchQuery.includes(",") ? { "location.address": searchQuery } : { q: searchQuery }),
-    ...(categoryId ? { categories: getAllCategories()[categoryId] } : {})
-  };
-
-  try {
-    const response = await fetch(eventbriteUrl, {
-      headers: {
-        "Authorization": "Bearer " + eventbriteKey,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(queryParams),
-      method: "POST"
-    });
-    const eventbriteData = await response.json();
+  Promise.all([
+    fetch(eventbriteUrl + "?" + new URLSearchParams(eventbriteQueryParams)).then(response => response.json()),
+    fetch(bandsInTownUrl + "?" + new URLSearchParams(bandsInTownQueryParams)).then(response => response.json())
+  ])
+  .then(([eventbriteData, bandsInTownData]) => {
+    // List of events from the Eventbrite API response
     const eventbriteEvents = eventbriteData.events || [];
-
-    const bandsInTownQueryParams = {
-      app_id: bandsInTownKey,
-      ...(searchQuery.includes(",") ? { "location": searchQuery } : { "keyword": searchQuery })
-    };
-
-    const bandsInTownResponse = await fetch(bandsInTownUrl + "?" + new URLSearchParams(bandsInTownQueryParams));
-    const bandsInTownData = await bandsInTownResponse.json();
+    // List of events from the BandsInTown API response
     const bandsInTownEvents = bandsInTownData || [];
-
     const allEvents = [...eventbriteEvents, ...bandsInTownEvents];
-    res.json({ events: allEvents });
-    console.log(allEvents);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+
+    // Set the searchPage property to true
+    res.locals.searchPage = true;
+
+    res.render('events', { events: allEvents });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({ message: "An error occurred while searching for events" });
+  });
 });
+
+console.log(Promise.all)
 
 module.exports = router;

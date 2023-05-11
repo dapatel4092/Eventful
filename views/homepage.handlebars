@@ -1,6 +1,12 @@
-<h1>Event Search</h1>
 
-<form action="/search" method="POST">
+
+
+{{#if searchPage}}
+  <h1>Event Search</h1>
+{{/if}}
+
+
+<form action="/search" method="GET">
   <label for="search">Search:</label>
   <input type="text" name="search" id="search" placeholder="Search...">
 
@@ -16,7 +22,7 @@
 </form>
 
 <!-- events.handlebars -->
-
+<form action="/search" method="POST">
 {{#if events}}
   <h2>Events:</h2>
   <ul>
@@ -32,7 +38,7 @@
 {{else}}
   <p>No events found.</p>
 {{/if}}
-
+</form>
 
 <script src="../controllers/home-routes.js"></script>
 

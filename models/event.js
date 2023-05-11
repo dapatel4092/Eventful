@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const fetch = require("node-fetch");
+
 
 const eventbriteUrl = "https://www.eventbriteapi.com/v3/events/search/?token=QOOHC5WX4AP43WMELN2V";
 const eventbriteKey = "BQ26PEGLUJPOJV34X6";
